@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Offly</string>
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="app_tagline">Stay focused, stay free</string>
+    <string name="app_version">Version 0.0.1</string>
+</resources>

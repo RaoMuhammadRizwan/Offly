@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/offly_nav_graph"
+    app:startDestination="@id/splashFragment">
+
+    <fragment
+        android:id="@+id/splashFragment"
+        android:name="com.example.offly.Fragments.SplashFragment"
+        android:label="fragment_splash"
+        tools:layout="@layout/fragment_splash" >
+        <action
+            android:id="@+id/action_splashFragment_to_onboardingFragment1"
+            app:destination="@id/onboardingFragment1"
+            app:popUpTo="@id/splashFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_splashFragment_to_homeScreenFragment"
+            app:destination="@id/homeScreenFragment"
+            app:popUpTo="@id/splashFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/homeScreenFragment"
+        android:name="com.example.offly.Fragments.HomeScreenFragment"
+        android:label="fragment_home_screen"
+        tools:layout="@layout/fragment_home_screen" />
+    <fragment
+        android:id="@+id/onboardingFragment1"
+        android:name="com.example.offly.Fragments.OnboardingFragment1"
+        android:label="fragment_onboarding1"
+        tools:layout="@layout/fragment_onboarding1" />
+    <fragment
+        android:id="@+id/onboardingFragment2"
+        android:name="com.example.offly.Fragments.OnboardingFragment2"
+        android:label="fragment_onboarding2"
+        tools:layout="@layout/fragment_onboarding2" />
+    <fragment
+        android:id="@+id/permissionFragment1"
+        android:name="com.example.offly.Fragments.permissionFragment1"
+        android:label="fragment_permission1"
+        tools:layout="@layout/fragment_permission1" />
+    <fragment
+        android:id="@+id/permissionFragment2"
+        android:name="com.example.offly.Fragments.permissionFragment2"
+        android:label="fragment_permission2"
+        tools:layout="@layout/fragment_permission2" />
+    <fragment
+        android:id="@+id/permissionFragment3"
+        android:name="com.example.offly.Fragments.permissionFragment3"
+        android:label="fragment_permission3"
+        tools:layout="@layout/fragment_permission3" />
+</navigation>
