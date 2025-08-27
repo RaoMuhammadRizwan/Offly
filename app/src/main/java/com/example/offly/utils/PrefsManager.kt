@@ -2,6 +2,7 @@ package com.example.offly.utils
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.util.Log
 
 class PrefsManager(context : Context) {
     private val offlyPrefs : SharedPreferences = context.getSharedPreferences(PREFS_NAME , Context.MODE_PRIVATE)
@@ -15,8 +16,10 @@ class PrefsManager(context : Context) {
         offlyPrefs.edit().putBoolean(IS_FIRST_TIME_LAUNCH , isFirstTime).apply()
     }
 
-    fun isFirstTimeLaunch() : Boolean{
-        return offlyPrefs.getBoolean(IS_FIRST_TIME_LAUNCH , true)
+    fun isFirstTimeLaunch() : Boolean {
+        val isFirstTime = offlyPrefs.getBoolean(IS_FIRST_TIME_LAUNCH, true)
+        Log.d("TEST RR", "First time launch : $isFirstTime")
+        return isFirstTime
     }
 
     /**

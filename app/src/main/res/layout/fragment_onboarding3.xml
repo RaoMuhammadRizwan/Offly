@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/glossy_black_background">
 
-    <!-- Content Card - Placed first for proper constraint ordering -->
+    <!-- Content Card -->
     <androidx.cardview.widget.CardView
         android:id="@+id/contentCard"
         android:layout_width="0dp"
@@ -42,16 +42,18 @@
                     android:orientation="vertical"
                     android:padding="36dp">
 
+                    <!-- Title -->
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:fontFamily="sans-serif-black"
                         android:gravity="center"
                         android:letterSpacing="0.08"
-                        android:text="FocusTime"
+                        android:text="Stay Focused, Stay Free"
                         android:textColor="#FFFFFF"
-                        android:textSize="28sp" />
+                        android:textSize="24sp" />
 
+                    <!-- Subtitle -->
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -60,13 +62,13 @@
                         android:fontFamily="sans-serif"
                         android:gravity="center"
                         android:lineSpacingMultiplier="1.4"
-                        android:text="Master your digital habits with intelligent insights and premium focus tools"
+                        android:text="Build better habits and reclaim your time"
                         android:textColor="#E0E0E0"
                         android:textSize="16sp" />
 
                     <!-- Action Button -->
                     <androidx.cardview.widget.CardView
-                        android:id="@+id/beginJourneyCard"
+                        android:id="@+id/getStartedCard"
                         android:layout_width="match_parent"
                         android:layout_height="60dp"
                         android:layout_marginTop="28dp"
@@ -86,81 +88,36 @@
                                 android:background="@drawable/glossy_button_overlay" />
 
                             <TextView
-                                android:id="@+id/startJourney"
+                                android:id="@+id/getStartedButton"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:fontFamily="sans-serif-black"
                                 android:gravity="center"
                                 android:letterSpacing="0.05"
-                                android:text="Begin Journey"
+                                android:text="Get Started"
                                 android:textColor="#000000"
                                 android:textSize="18sp" />
                         </FrameLayout>
                     </androidx.cardview.widget.CardView>
-
-                    <!-- Features Row -->
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="24dp"
-                        android:gravity="center"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="sans-serif-medium"
-                            android:text="Premium"
-                            android:textColor="#CCCCCC"
-                            android:textSize="12sp" />
-
-                        <View
-                            android:layout_width="20dp"
-                            android:layout_height="1dp"
-                            android:layout_marginHorizontal="16dp"
-                            android:background="@drawable/glossy_separator" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="sans-serif-medium"
-                            android:text="Ad-Free"
-                            android:textColor="#CCCCCC"
-                            android:textSize="12sp" />
-
-                        <View
-                            android:layout_width="20dp"
-                            android:layout_height="1dp"
-                            android:layout_marginHorizontal="16dp"
-                            android:background="@drawable/glossy_separator" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="sans-serif-medium"
-                            android:text="Secure"
-                            android:textColor="#CCCCCC"
-                            android:textSize="12sp" />
-                    </LinearLayout>
                 </LinearLayout>
             </FrameLayout>
         </androidx.core.widget.NestedScrollView>
     </androidx.cardview.widget.CardView>
 
-    <!-- Hero Section - Placed after content card for proper z-ordering -->
+    <!-- Hero Section -->
     <androidx.cardview.widget.CardView
         android:id="@+id/heroCard"
-        android:layout_width="280dp"
-        android:layout_height="280dp"
+        android:layout_width="260dp"
+        android:layout_height="260dp"
         android:layout_marginTop="30dp"
         app:cardBackgroundColor="#000000"
-        app:cardCornerRadius="140dp"
+        app:cardCornerRadius="130dp"
         app:cardElevation="32dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <!-- Stack overlay + content -->
+        <!-- Stack overlay + icon -->
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -171,14 +128,13 @@
                 android:background="@drawable/glossy_circle_overlay" />
 
             <ImageView
-                android:layout_width="150dp"
-                android:layout_height="150dp"
+                android:layout_width="140dp"
+                android:layout_height="140dp"
                 android:layout_gravity="center"
                 android:contentDescription="@string/app_name"
                 android:scaleType="centerInside"
-                android:src="@drawable/ic_screen_one_img" />
+                android:src="@drawable/ic_meditation" />
         </FrameLayout>
-
     </androidx.cardview.widget.CardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

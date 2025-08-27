@@ -14,6 +14,8 @@
             android:id="@+id/action_splashFragment_to_onboardingFragment1"
             app:destination="@id/onboardingFragment1"
             app:popUpTo="@id/splashFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
             app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_splashFragment_to_homeScreenFragment"
@@ -30,12 +32,29 @@
         android:id="@+id/onboardingFragment1"
         android:name="com.example.offly.Fragments.OnboardingFragment1"
         android:label="fragment_onboarding1"
-        tools:layout="@layout/fragment_onboarding1" />
+        tools:layout="@layout/fragment_onboarding1" >
+        <action
+            android:id="@+id/action_onboardingFragment1_to_onboardingFragment2"
+            app:destination="@id/onboardingFragment2"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+
+    </fragment>
     <fragment
         android:id="@+id/onboardingFragment2"
         android:name="com.example.offly.Fragments.OnboardingFragment2"
         android:label="fragment_onboarding2"
-        tools:layout="@layout/fragment_onboarding2" />
+        tools:layout="@layout/fragment_onboarding2" >
+        <action
+            android:id="@+id/action_onboardingFragment2_to_onboardingFragment3"
+            app:destination="@id/onboardingFragment3"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+    </fragment>
     <fragment
         android:id="@+id/permissionFragment1"
         android:name="com.example.offly.Fragments.permissionFragment1"
@@ -51,4 +70,8 @@
         android:name="com.example.offly.Fragments.permissionFragment3"
         android:label="fragment_permission3"
         tools:layout="@layout/fragment_permission3" />
+    <fragment
+        android:id="@+id/onboardingFragment3"
+        android:name="com.example.offly.Fragments.onboardingFragment3"
+        android:label="onboardingFragment3" />
 </navigation>

@@ -5,4 +5,27 @@
 
     <string name="app_tagline">Stay focused, stay free</string>
     <string name="app_version">Version 0.0.1</string>
+
+    <!-- Onboarding Titles -->
+    <string name="onboarding_title_app_name">Scrolly</string>
+    <string name="onboarding_title_track_time">Track Your Screen Time</string>
+    <string name="onboarding_title_focus">Stay Focused, Stay Free</string>
+
+    <!-- Onboarding Subtitles -->
+    <string name="onboarding_subtitle_app_name">Stay Focused. Stay Free.</string>
+    <string name="onboarding_subtitle_track_time">See where your time goes and stay in control</string>
+    <string name="onboarding_subtitle_focus">Build better habits and reclaim your time</string>
+    <string name="onboarding_subtitle_permission">Scrolly needs usage access so it can show you how much time you spend on apps and help you stay focused</string>
+
+    <!-- Buttons -->
+    <string name="btn_continue">Continue</string>
+    <string name="btn_get_started">Get Started</string>
+    <string name="btn_make_me_free">Make Me Free</string>
+
+    <!-- Footers -->
+    <string name="footer_settings_note">You can change this anytime in system settings</string>
+    <string name="footer_permission_note">You can manage this in system settings</string>
+
+    <!-- Accessibility -->
+    <string name="onboarding_icon">Onboarding icon</string>
 </resources>

@@ -3,16 +3,7 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
-    <!-- Primary Brand Colors -->
-    <color name="primary">#4CAF50</color>
-    <color name="primary_dark">#388E3C</color>
     <color name="accent">#FF9800</color>
-
-    <!-- Error & Success -->
-    <color name="error">#E53935</color>
-    <color name="success">#43A047</color>
-    <color name="warning">#FB8C00</color>
-
     <!-- Overlay & Divider -->
     <color name="divider">#E0E0E0</color>
     <color name="overlay_dark">#66000000</color>
@@ -26,5 +17,17 @@
     <color name="dark_primary_Text">#E0E0E0</color>
     <color name="dark_secondary_Text">#A0A0A0</color>
     <color name="dark_hint_Text">#757575</color>
+
+    <!-- Grays -->
+    <color name="gray_900">#212121</color>
+    <color name="gray_700">#616161</color>
+    <color name="gray_500">#9E9E9E</color>
+    <color name="gray_300">#E0E0E0</color>
+    <color name="gray_100">#F5F5F5</color>
+
+    <!-- Primary Accent -->
+    <color name="primary">#000000</color>
+    <color name="primary_dark">#121212</color>
+    <color name="primary_light">#424242</color>
 </resources>
 
