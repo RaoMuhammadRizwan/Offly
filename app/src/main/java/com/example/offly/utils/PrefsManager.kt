@@ -11,6 +11,7 @@ class PrefsManager(context : Context) {
         private const val PREFS_NAME = "offlyPrefs"
         private const val IS_FIRST_TIME_LAUNCH = "IsFirstTimeLaunch"
         private const val IS_USAGE_ACCESS_GRANTED = "IsUsageAccessGranted"
+        private const val IS_ACCESSIBILITY_GRANTED = "IsAccessibilityGranted"
     }
 
     fun setFirstTimeLaunch(isFirstTime : Boolean){
@@ -39,6 +40,16 @@ class PrefsManager(context : Context) {
         val isUsageAccessPermissionGranted = offlyPrefs.getBoolean(IS_USAGE_ACCESS_GRANTED , false)
         Log.d("TEST RR" , "Usage access permission granted : $isUsageAccessPermissionGranted")
         return isUsageAccessPermissionGranted
+    }
+
+    fun setAccessibilityPermissionGranted(granted : Boolean){
+        offlyPrefs.edit().putBoolean(IS_ACCESSIBILITY_GRANTED , granted).apply()
+    }
+
+    fun getAccessibilityPermissionGranted() : Boolean {
+        val isAccessibilityPermissionGranted = offlyPrefs.getBoolean(IS_ACCESSIBILITY_GRANTED , false)
+        Log.d("TEST RR" , "Accessibility permission granted : $isAccessibilityPermissionGranted")
+        return isAccessibilityPermissionGranted
     }
 
 

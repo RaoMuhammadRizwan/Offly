@@ -28,4 +28,5 @@
 
     <!-- Accessibility -->
     <string name="onboarding_icon">Onboarding icon</string>
+    <string name="accessibility_service_description">Offly needs Accessibility Service to monitor and manage your screen interactions safely.</string>
 </resources>

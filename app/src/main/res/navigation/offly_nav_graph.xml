@@ -70,14 +70,9 @@
         android:label="fragment_permission2"
         tools:layout="@layout/fragment_permission2" >
         <action
-            android:id="@+id/action_permissionFragment2_to_permissionFragment3"
-            app:destination="@id/permissionFragment3" />
+            android:id="@+id/action_permissionFragment2_to_homeScreenFragment"
+            app:destination="@id/homeScreenFragment" />
     </fragment>
-    <fragment
-        android:id="@+id/permissionFragment3"
-        android:name="com.example.offly.Fragments.permissionFragment3"
-        android:label="fragment_permission3"
-        tools:layout="@layout/fragment_permission3" />
     <fragment
         android:id="@+id/onboardingFragment3"
         android:name="com.example.offly.Fragments.onboardingFragment3"
