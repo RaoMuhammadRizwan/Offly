@@ -10,6 +10,7 @@ class PrefsManager(context : Context) {
     companion object {
         private const val PREFS_NAME = "offlyPrefs"
         private const val IS_FIRST_TIME_LAUNCH = "IsFirstTimeLaunch"
+        private const val IS_USAGE_ACCESS_GRANTED = "IsUsageAccessGranted"
     }
 
     fun setFirstTimeLaunch(isFirstTime : Boolean){
@@ -28,6 +29,16 @@ class PrefsManager(context : Context) {
      */
     fun resetFirstTimeLaunch() {
         offlyPrefs.edit().putBoolean(IS_FIRST_TIME_LAUNCH, true).apply()
+    }
+
+    fun setUsageAccessPermissionGranted(granted : Boolean){
+        offlyPrefs.edit().putBoolean(IS_USAGE_ACCESS_GRANTED , granted).apply()
+    }
+
+    fun getUsageAccessPermissionGranted() : Boolean {
+        val isUsageAccessPermissionGranted = offlyPrefs.getBoolean(IS_USAGE_ACCESS_GRANTED , false)
+        Log.d("TEST RR" , "Usage access permission granted : $isUsageAccessPermissionGranted")
+        return isUsageAccessPermissionGranted
     }
 
 

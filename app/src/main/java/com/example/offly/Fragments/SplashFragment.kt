@@ -67,6 +67,7 @@ class SplashFragment : Fragment() {
         if (!isAdded) return
         try {
             Log.d(TAG, "First time launch : ${prefsManager.isFirstTimeLaunch()}")
+            prefsManager.resetFirstTimeLaunch()
             val destination = if (prefsManager.isFirstTimeLaunch()) {
                 prefsManager.setFirstTimeLaunch(false)
                 Log.d(TAG, "Navigating to onboarding screen")

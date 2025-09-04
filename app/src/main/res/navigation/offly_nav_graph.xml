@@ -59,12 +59,20 @@
         android:id="@+id/permissionFragment1"
         android:name="com.example.offly.Fragments.permissionFragment1"
         android:label="fragment_permission1"
-        tools:layout="@layout/fragment_permission1" />
+        tools:layout="@layout/fragment_permission1" >
+        <action
+            android:id="@+id/action_permissionFragment1_to_permissionFragment2"
+            app:destination="@id/permissionFragment2" />
+    </fragment>
     <fragment
         android:id="@+id/permissionFragment2"
         android:name="com.example.offly.Fragments.permissionFragment2"
         android:label="fragment_permission2"
-        tools:layout="@layout/fragment_permission2" />
+        tools:layout="@layout/fragment_permission2" >
+        <action
+            android:id="@+id/action_permissionFragment2_to_permissionFragment3"
+            app:destination="@id/permissionFragment3" />
+    </fragment>
     <fragment
         android:id="@+id/permissionFragment3"
         android:name="com.example.offly.Fragments.permissionFragment3"
@@ -73,5 +81,13 @@
     <fragment
         android:id="@+id/onboardingFragment3"
         android:name="com.example.offly.Fragments.onboardingFragment3"
-        android:label="onboardingFragment3" />
+        android:label="onboardingFragment3" >
+        <action
+            android:id="@+id/action_onboardingFragment3_to_permissionFragment1"
+            app:destination="@id/permissionFragment1"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+    </fragment>
 </navigation>
