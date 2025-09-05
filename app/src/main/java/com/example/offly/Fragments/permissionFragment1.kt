@@ -40,8 +40,8 @@
         override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
             super.onViewCreated(view, savedInstanceState)
             prefsManager = PrefsManager(requireContext())
-            binding.btnGrantCard.setOnClickListener { navigateToSettings() }
-            binding.btnSkip.setOnClickListener { navigateToNextScreen() }
+            binding.btnGrantUsageAccess.setOnClickListener { navigateToSettings() }
+            binding.btnSkipUsageAccess.setOnClickListener { navigateToNextScreen() }
         }
 
         private fun navigateToSettings() {
