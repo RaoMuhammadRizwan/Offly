@@ -1,4 +1,4 @@
-package com.example.offly.Fragments
+package com.example.offly.Fragments.onBoarding
 
 import android.os.Build
 import android.os.Bundle
@@ -25,7 +25,7 @@ class onboardingFragment3 : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val manufacturer = Build.MANUFACTURER
        Toast.makeText(this.requireContext() , manufacturer , Toast.LENGTH_SHORT).show()
-        binding.getStartedCard.setOnClickListener { navigateToNextScreen() }
+        binding.btnFinish.setOnClickListener { navigateToNextScreen() }
     }
 
     private fun navigateToNextScreen() {

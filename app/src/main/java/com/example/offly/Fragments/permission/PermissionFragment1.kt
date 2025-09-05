@@ -1,4 +1,4 @@
-    package com.example.offly.Fragments
+    package com.example.offly.Fragments.permission
 
     import android.content.Intent
     import android.net.Uri
@@ -40,8 +40,8 @@
         override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
             super.onViewCreated(view, savedInstanceState)
             prefsManager = PrefsManager(requireContext())
-            binding.btnGrantUsageAccess.setOnClickListener { navigateToSettings() }
-            binding.btnSkipUsageAccess.setOnClickListener { navigateToNextScreen() }
+            binding.btnEnablePermission1.setOnClickListener { navigateToSettings() }
+            binding.btnSkip.setOnClickListener { navigateToNextScreen() }
         }
 
         private fun navigateToSettings() {

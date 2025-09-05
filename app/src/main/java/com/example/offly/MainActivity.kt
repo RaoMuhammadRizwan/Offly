@@ -26,6 +26,8 @@ import com.example.offly.databinding.ActivityMainBinding
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id){
+                R.id.settingsFragment,
+                R.id.blockDetailsFragment,
                 R.id.homeScreenFragment -> binding.bottomNav.visibility = View.VISIBLE
                 else -> binding.bottomNav.visibility = View.GONE
             }

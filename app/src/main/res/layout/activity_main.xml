@@ -23,12 +23,15 @@
         android:id="@+id/bottom_nav"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:background="@drawable/bg_bottom_nav"
         android:visibility="gone"
-        android:background="@color/accent"
-        app:itemIconTint="@color/black"
+        android:elevation="8dp"
+        app:itemIconTint="@color/nav_item_colors"
         app:menu="@menu/bottom_nav_menu"
+        app:labelVisibilityMode="unlabeled"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

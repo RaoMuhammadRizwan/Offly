@@ -34,14 +34,14 @@
     <!-- Home Screen -->
     <fragment
         android:id="@+id/homeScreenFragment"
-        android:name="com.example.offly.Fragments.HomeScreenFragment"
+        android:name="com.example.offly.Fragments.homeScreenFragment"
         android:label="fragment_home_screen"
         tools:layout="@layout/fragment_home_screen" />
 
     <!-- Onboarding Flow -->
     <fragment
         android:id="@+id/onboardingFragment1"
-        android:name="com.example.offly.Fragments.OnboardingFragment1"
+        android:name="com.example.offly.Fragments.onBoarding.OnboardingFragment1"
         android:label="fragment_onboarding1"
         tools:layout="@layout/fragment_onboarding1" >
         <action
@@ -55,7 +55,7 @@
 
     <fragment
         android:id="@+id/onboardingFragment2"
-        android:name="com.example.offly.Fragments.OnboardingFragment2"
+        android:name="com.example.offly.Fragments.onBoarding.OnboardingFragment2"
         android:label="fragment_onboarding2"
         tools:layout="@layout/fragment_onboarding2" >
         <action
@@ -69,7 +69,7 @@
 
     <fragment
         android:id="@+id/onboardingFragment3"
-        android:name="com.example.offly.Fragments.onboardingFragment3"
+        android:name="com.example.offly.Fragments.onBoarding.onboardingFragment3"
         android:label="onboardingFragment3" >
         <action
             android:id="@+id/action_onboardingFragment3_to_permissionFragment1"
@@ -83,7 +83,7 @@
     <!-- Permission Flow -->
     <fragment
         android:id="@+id/permissionFragment1"
-        android:name="com.example.offly.Fragments.permissionFragment1"
+        android:name="com.example.offly.Fragments.permission.permissionFragment1"
         android:label="fragment_permission1"
         tools:layout="@layout/fragment_permission1" >
         <action
@@ -97,7 +97,7 @@
 
     <fragment
         android:id="@+id/permissionFragment2"
-        android:name="com.example.offly.Fragments.permissionFragment2"
+        android:name="com.example.offly.Fragments.permission.permissionFragment2"
         android:label="fragment_permission2"
         tools:layout="@layout/fragment_permission2" >
         <action
@@ -110,5 +110,15 @@
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"/>
     </fragment>
+    <fragment
+        android:id="@+id/blockDetailsFragment"
+        android:name="com.example.offly.Fragments.blockDetailsFragment"
+        android:label="fragment_block_details"
+        tools:layout="@layout/fragment_block_details" />
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.example.offly.Fragments.settingsFragment"
+        android:label="fragment_settings"
+        tools:layout="@layout/fragment_settings" />
 
 </navigation>

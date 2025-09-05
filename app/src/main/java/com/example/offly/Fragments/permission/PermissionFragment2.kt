@@ -1,4 +1,4 @@
-package com.example.offly.Fragments
+package com.example.offly.Fragments.permission
 
 import android.content.Intent
 import android.os.Bundle
@@ -41,10 +41,10 @@ class permissionFragment2 : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         prefsManager = PrefsManager(requireContext())
-        binding.btnGrantAccessibility.setOnClickListener{
+        binding.btnEnableAccessibility.setOnClickListener{
             navigateToSettings()
         }
-        binding.btnSkipAccessibility.setOnClickListener{
+        binding.btnSkip.setOnClickListener{
             navigateToNextScreen()
         }
     }

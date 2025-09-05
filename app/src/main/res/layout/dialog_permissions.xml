@@ -54,7 +54,7 @@
             android:layout_marginStart="20dp"
             android:paddingHorizontal="20dp"
             android:paddingVertical="10dp"
-            android:background="@drawable/rounded_button_bg"
+            android:background="@drawable/bg_button"
             android:text="Grant Now"
             android:textColor="@android:color/white"
             android:textSize="14sp"/>

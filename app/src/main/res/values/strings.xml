@@ -1,32 +1,31 @@
 <resources>
     <string name="app_name">Offly</string>
+    <string name="app_version">Version 1.0.0</string>
 
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="onboarding1_title">FocusTime</string>
+    <string name="onboarding1_subtitle">Master your digital habits with intelligent insights and premium focus tools.</string>
+    <string name="onboarding1_btn_text">Begin Journey</string>
 
-    <string name="app_tagline">Stay focused, stay free</string>
-    <string name="app_version">Version 0.0.1</string>
+    <string name="onboarding2_title">Track Your Screen Time</string>
+    <string name="onboarding2_subtitle">See where your time goes and stay in control.</string>
+    <string name="onboarding2_btn_text">Get Started</string>
 
-    <!-- Onboarding Titles -->
-    <string name="onboarding_title_app_name">Scrolly</string>
-    <string name="onboarding_title_track_time">Track Your Screen Time</string>
-    <string name="onboarding_title_focus">Stay Focused, Stay Free</string>
+    <string name="onboarding3_title">Stay Focused, Stay Free</string>
+    <string name="onboarding3_subtitle">Build better habits and reclaim your time with mindful usage.</string>
+    <string name="onboarding3_btn_text">Finish</string>
 
-    <!-- Onboarding Subtitles -->
-    <string name="onboarding_subtitle_app_name">Stay Focused. Stay Free.</string>
-    <string name="onboarding_subtitle_track_time">See where your time goes and stay in control</string>
-    <string name="onboarding_subtitle_focus">Build better habits and reclaim your time</string>
-    <string name="onboarding_subtitle_permission">Scrolly needs usage access so it can show you how much time you spend on apps and help you stay focused</string>
+    <string name="permission1_title">Usage Access Permission</string>
+    <string name="permission1_subtitle">We need this to track your screen time and app usage accurately.</string>
+    <string name="permission1_description">Without this, Offly cannot measure your screen time or show focus reports.</string>
+    <string name="permission1_btn_text">Grant Permission</string>
 
-    <!-- Buttons -->
-    <string name="btn_continue">Continue</string>
-    <string name="btn_get_started">Get Started</string>
-    <string name="btn_make_me_free">Make Me Free</string>
+    <string name="permission_skip_text">Skip for now</string>
 
-    <!-- Footers -->
-    <string name="footer_settings_note">You can change this anytime in system settings</string>
-    <string name="footer_permission_note">You can manage this in system settings</string>
+    <string name="permission2_title">Accessibility Service Permission</string>
+    <string name="permission2_subtitle">We need this to monitor and manage your screen interactions safely.</string>
+    <string name="permission2_btn_text">Grant Permission</string>
+    <string name="permission2_description">Without this, Offly cannot prevent apps from distracting you.</string>"
 
-    <!-- Accessibility -->
-    <string name="onboarding_icon">Onboarding icon</string>
+
     <string name="accessibility_service_description">Offly needs Accessibility Service to monitor and manage your screen interactions safely.</string>
 </resources>

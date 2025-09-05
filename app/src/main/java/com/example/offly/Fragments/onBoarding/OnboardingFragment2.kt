@@ -1,4 +1,4 @@
-package com.example.offly.Fragments
+package com.example.offly.Fragments.onBoarding
 
 import android.os.Bundle
 import android.util.Log
@@ -8,32 +8,32 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.offly.R
-import com.example.offly.databinding.FragmentOnboarding1Binding
+import com.example.offly.databinding.FragmentOnboarding2Binding
 
-class OnboardingFragment1 : Fragment() {
-
-    private var _binding : FragmentOnboarding1Binding? = null
+class OnboardingFragment2 : Fragment() {
+    private var _binding: FragmentOnboarding2Binding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        _binding = FragmentOnboarding1Binding.inflate(inflater , container , false)
+        _binding = FragmentOnboarding2Binding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.beginJourneyCard.setOnClickListener { navigateToNextScreen() }
+        binding.btnNext.setOnClickListener { navigateToNextScreen() }
 
     }
 
     private fun navigateToNextScreen() {
         try {
             findNavController().navigate(
-                R.id.action_onboardingFragment1_to_onboardingFragment2
+                R.id.action_onboardingFragment2_to_onboardingFragment3
             )
-        } catch (e: Exception) {
-            Log.e("OnboardingFragment1", "Navigation failed: ${e.message}", e)
+
+        }catch (e : Exception){
+            Log.e("OnboardingFragment2" , "Navigation failed : ${e.message}" , e)
         }
     }
 
