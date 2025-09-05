@@ -98,8 +98,4 @@ class permissionFragment2 : Fragment() {
         super.onDestroyView()
         _binding = null
     }
-
-
-
-
 }
