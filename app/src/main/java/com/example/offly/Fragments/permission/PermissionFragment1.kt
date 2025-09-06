@@ -59,9 +59,9 @@
 
         private fun navigateToNextScreen(){
             try {
-                findNavController().navigate(
-                    R.id.action_permissionFragment1_to_permissionFragment2
-                )
+//                findNavController().navigate(
+//                    R.id.action_permissionFragment1_to_permissionFragment2
+//                )
             } catch (e : Exception){
                 Log.e("PermissionFragment1" , "Navigation failed : ${e.message}" , e)
             }

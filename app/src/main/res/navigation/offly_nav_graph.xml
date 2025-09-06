@@ -34,7 +34,7 @@
     <!-- Home Screen -->
     <fragment
         android:id="@+id/homeScreenFragment"
-        android:name="com.example.offly.Fragments.homeScreenFragment"
+        android:name="com.example.offly.Fragments.HomeScreenFragment"
         android:label="fragment_home_screen"
         tools:layout="@layout/fragment_home_screen" />
 
@@ -72,12 +72,8 @@
         android:name="com.example.offly.Fragments.onBoarding.onboardingFragment3"
         android:label="onboardingFragment3" >
         <action
-            android:id="@+id/action_onboardingFragment3_to_permissionFragment1"
-            app:destination="@id/permissionFragment1"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"/>
+            android:id="@+id/action_onboardingFragment3_to_homeScreenFragment"
+            app:destination="@id/homeScreenFragment" />
     </fragment>
 
     <!-- Permission Flow -->
@@ -85,31 +81,13 @@
         android:id="@+id/permissionFragment1"
         android:name="com.example.offly.Fragments.permission.permissionFragment1"
         android:label="fragment_permission1"
-        tools:layout="@layout/fragment_permission1" >
-        <action
-            android:id="@+id/action_permissionFragment1_to_permissionFragment2"
-            app:destination="@id/permissionFragment2"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"/>
-    </fragment>
+        tools:layout="@layout/fragment_permission1" />
 
     <fragment
         android:id="@+id/permissionFragment2"
         android:name="com.example.offly.Fragments.permission.permissionFragment2"
         android:label="fragment_permission2"
-        tools:layout="@layout/fragment_permission2" >
-        <action
-            android:id="@+id/action_permissionFragment2_to_homeScreenFragment"
-            app:destination="@id/homeScreenFragment"
-            app:popUpTo="@id/offly_nav_graph"
-            app:popUpToInclusive="true"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"/>
-    </fragment>
+        tools:layout="@layout/fragment_permission2" />
     <fragment
         android:id="@+id/blockDetailsFragment"
         android:name="com.example.offly.Fragments.blockDetailsFragment"

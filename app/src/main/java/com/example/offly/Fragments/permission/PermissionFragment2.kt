@@ -61,9 +61,9 @@ class permissionFragment2 : Fragment() {
 
     private fun navigateToNextScreen(){
         try {
-            findNavController().navigate(
-                R.id.action_permissionFragment2_to_homeScreenFragment
-            )
+//            findNavController().navigate(
+//                R.id.action_permissionFragment2_to_homeScreenFragment
+//            )
         } catch (e : Exception){
             Log.e("AccessibilityFragment", "Navigation failed: ${e.message}", e)
         }
