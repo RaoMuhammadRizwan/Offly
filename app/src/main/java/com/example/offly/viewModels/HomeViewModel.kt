@@ -15,6 +15,7 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
     val totalUsageSinceMidnight = MutableLiveData<String>()
     val topUsedApps = MutableLiveData<List<Triple<String, String, Drawable>>>()
     val isUsageAccessPermissionRequired = MutableLiveData<Boolean>()
+    val weeklySocialUsage = MutableLiveData<List<Float>>()
 
 
     fun loadTotalUsageSinceMidnight() {
@@ -39,6 +40,21 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
                     Log.e("HomeViewModel", "Error loading top used apps", e)
                     topUsedApps.postValue(emptyList())
                 }
+            }
+        }
+    }
+
+    fun loadWeeklySocialUsage() {
+        if (repo.isUsageAccessPermissionGranted()) {
+            viewModelScope.launch(Dispatchers.IO) {
+                try {
+                    val usage = repo.getWeeklySocialUsage()
+                    weeklySocialUsage.postValue(usage)
+                } catch (e: Exception) {
+                    Log.e("HomeViewModel", "Error loading weekly social usage", e)
+                    weeklySocialUsage.postValue(emptyList())
+                }
+
             }
         }
     }

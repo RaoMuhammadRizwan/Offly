@@ -23,8 +23,9 @@ class HomeRepository(private val context: Context) {
         "com.whatsapp",
         "com.instagram.android",
         "com.facebook.katana",
-        "com.zhiliaoapp.musically", // TikTok
+        "com.zhiliaoapp.musically",
         "com.snapchat.android",
+        "com.linkedin.android"
     )
 
     /** Timestamp for today 00:00 */
@@ -112,5 +113,44 @@ class HomeRepository(private val context: Context) {
             }
             .sortedByDescending { it.usageTimeMs }
             .take(limit)
+    }
+
+    /** ✅ 7-day history for ONLY the socialApps list (returns hours/day). */
+    fun getWeeklySocialUsage(): List<Float> {
+        val pm = context.packageManager
+        val today = Calendar.getInstance()
+
+        // Move to end of current day
+        today.set(Calendar.HOUR_OF_DAY, 23)
+        today.set(Calendar.MINUTE, 59)
+        today.set(Calendar.SECOND, 59)
+        today.set(Calendar.MILLISECOND, 999)
+
+        var end = today.timeInMillis
+        val hoursPerDay = mutableListOf<Float>()
+
+        repeat(7) {
+            // Start of the day
+            today.set(Calendar.HOUR_OF_DAY, 0)
+            today.set(Calendar.MINUTE, 0)
+            today.set(Calendar.SECOND, 0)
+            today.set(Calendar.MILLISECOND, 0)
+            val start = today.timeInMillis
+
+            val usage = usageSince(start, end)
+
+            // Sum only apps in the predefined socialApps set
+            val totalMs = usage.entries
+                .filter { it.key in socialApps }
+                .sumOf { it.value }
+
+            hoursPerDay.add(totalMs / 1000f / 60f / 60f) // convert ms → hours (Float)
+
+            // Prepare for previous day
+            end = start
+            today.add(Calendar.DAY_OF_YEAR, -1)
+        }
+
+        return hoursPerDay.reversed() // oldest → newest
     }
 }

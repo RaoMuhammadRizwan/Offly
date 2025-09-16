@@ -7,5 +7,8 @@
     <color name="nav_unselected">#666666</color>
     <color name="bg_bottom_nav_color">#0F0F0F</color>
 
+    <color name="chart_bar_start">#CCB71C1C</color>
+    <color name="chart_bar_end">#CC880E4F</color>
+
 </resources>
 
