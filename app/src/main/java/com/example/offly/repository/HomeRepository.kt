@@ -1,32 +1,116 @@
 package com.example.offly.repository
 
-import android.app.usage.UsageStats
+import android.app.usage.UsageEvents
 import android.app.usage.UsageStatsManager
 import android.content.Context
-import com.example.offly.R
+import android.content.pm.PackageManager
+import com.example.offly.dataclass.AppUsage
 import com.example.offly.utils.PrefsManager
 import java.util.Calendar
+import kotlin.math.max
 
 class HomeRepository(private val context: Context) {
+
     private val prefsManager = PrefsManager(context)
 
-    fun isUsageAccessPermissionGranted(): Boolean {
-        return prefsManager.getUsageAccessPermissionGranted()
+    /** ✅ check stored permission flag */
+    fun isUsageAccessPermissionGranted(): Boolean =
+        prefsManager.getUsageAccessPermissionGranted()
+
+    /** Packages we care about (social list) */
+    private val socialApps = setOf(
+        "com.google.android.youtube",
+        "com.whatsapp",
+        "com.instagram.android",
+        "com.facebook.katana",
+        "com.zhiliaoapp.musically", // TikTok
+        "com.snapchat.android",
+    )
+
+    /** Timestamp for today 00:00 */
+    private fun startOfToday(): Long = Calendar.getInstance().apply {
+        set(Calendar.HOUR_OF_DAY, 0)
+        set(Calendar.MINUTE, 0)
+        set(Calendar.SECOND, 0)
+        set(Calendar.MILLISECOND, 0)
+    }.timeInMillis
+
+    /** Build a map of package -> foreground ms for [start,end] */
+    private fun usageSince(start: Long, end: Long): Map<String, Long> {
+        val mgr = context.getSystemService(Context.USAGE_STATS_SERVICE) as UsageStatsManager
+        val events = mgr.queryEvents(start, end)
+        val event = UsageEvents.Event()
+
+        val lastStart = mutableMapOf<String, Long>()
+        val total = mutableMapOf<String, Long>()
+
+        while (events.hasNextEvent()) {
+            if (!events.getNextEvent(event)) break
+            val pkg = event.packageName ?: continue
+
+            when (event.eventType) {
+                UsageEvents.Event.MOVE_TO_FOREGROUND,
+                UsageEvents.Event.ACTIVITY_RESUMED ->
+                    lastStart[pkg] = max(event.timeStamp, start)
+
+                UsageEvents.Event.MOVE_TO_BACKGROUND,
+                UsageEvents.Event.ACTIVITY_PAUSED -> {
+                    val s = lastStart.remove(pkg) ?: continue
+                    val dur = (minOf(event.timeStamp, end) - max(s, start)).coerceAtLeast(0)
+                    if (dur > 0) total[pkg] = total.getOrDefault(pkg, 0L) + dur
+                }
+            }
+        }
+
+        // still running
+        for ((pkg, s) in lastStart) {
+            val dur = (end - max(s, start)).coerceAtLeast(0)
+            if (dur > 0) total[pkg] = total.getOrDefault(pkg, 0L) + dur
+        }
+        return total
     }
 
-    fun getTodayUsage(): String {
-        val usageStatsManager = context.getSystemService(Context.USAGE_STATS_SERVICE) as UsageStatsManager
-        val endTime = System.currentTimeMillis()
-        val startTime = endTime - 24*60*60*1000L
+    /** ✅ Total screen-on time (all launchable apps) since midnight. */
+    fun getTotalUsageSinceMidnight(): String {
+        val pm = context.packageManager
+        val self = context.packageName
+        val usage = usageSince(startOfToday(), System.currentTimeMillis())
 
-        val usageStats = usageStatsManager.queryAndAggregateUsageStats(startTime, endTime)
-        var totalMillis = 0L
-        usageStats.values.forEach { totalMillis += it.totalTimeInForeground }
-
-        val hours = totalMillis / 1000 / 60 / 60
-        val minutes = (totalMillis / 1000 / 60) % 60
-
-        return "${hours}h ${minutes}m"
+        val totalMs = usage.entries.sumOf { (pkg, ms) ->
+            if (pkg == self) 0L
+            else {
+                val ai = try { pm.getApplicationInfo(pkg, 0) } catch (_: Exception) { null }
+                if (ai != null && pm.getLaunchIntentForPackage(pkg) != null &&
+                    ai.flags and (android.content.pm.ApplicationInfo.FLAG_SYSTEM or
+                            android.content.pm.ApplicationInfo.FLAG_UPDATED_SYSTEM_APP) == 0
+                ) ms else 0L
+            }
+        }
+        val h = totalMs / 1000 / 60 / 60
+        val m = (totalMs / 1000 / 60) % 60
+        return "${h}h ${m}m"
     }
 
+    /** ✅ Top 3 apps from social list with icon, label & minutes. */
+    fun getTopUsedSocialApps(limit: Int = 3): List<AppUsage> {
+        val pm = context.packageManager
+        val usage = usageSince(startOfToday(), System.currentTimeMillis())
+
+        return usage.filterKeys { it in socialApps }
+            .mapNotNull { (pkg, ms) ->
+                try {
+                    val ai = pm.getApplicationInfo(pkg, 0)
+                    AppUsage(
+                        packageName = pkg,
+                        appName = ai.loadLabel(pm).toString(),
+                        appIcon = ai.loadIcon(pm),
+                        usageTimeMs = ms
+                    )
+                } catch (_: PackageManager.NameNotFoundException) {
+                    null
+                }
+            }
+            .sortedByDescending { it.usageTimeMs }
+            .take(limit)
+    }
 }

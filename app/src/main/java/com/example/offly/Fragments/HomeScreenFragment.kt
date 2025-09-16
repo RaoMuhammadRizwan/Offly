@@ -9,10 +9,13 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
+import com.example.offly.R
 import com.example.offly.databinding.FragmentHomeScreenBinding
-import com.example.offly.repository.HomeRepository
 import com.example.offly.utils.CustomDialog
 import com.example.offly.utils.PrefsManager
 import com.example.offly.viewModels.HomeViewModel
@@ -22,7 +25,7 @@ class HomeScreenFragment : Fragment() {
     private var _binding: FragmentHomeScreenBinding? = null
     private val binding get() = _binding!!
     private lateinit var prefsManager : PrefsManager
-    private val viewModel by lazy { HomeViewModel(HomeRepository(requireContext())) }
+    private lateinit var viewModel: HomeViewModel
 
     // Activity result for Usage Access settings
     private val usagePermissionLauncher = registerForActivityResult(
@@ -30,11 +33,12 @@ class HomeScreenFragment : Fragment() {
     ) {
         if (hasUsageAccessPermission()) {
             prefsManager.setUsageAccessPermissionGranted(granted = true)
-            hidePermissionMessage()
-            viewModel.loadTodayUsage()
+            unlockCards()
+            viewModel.loadTotalUsageSinceMidnight()
+            viewModel.loadTopUsedApps()
         } else {
             prefsManager.setUsageAccessPermissionGranted(granted = false)
-            showPermissionRequiredState()
+            lockCards()
         }
     }
 
@@ -47,6 +51,7 @@ class HomeScreenFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        viewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
         prefsManager = PrefsManager(requireContext())
         observeViewModel()
     }
@@ -54,33 +59,37 @@ class HomeScreenFragment : Fragment() {
     private fun observeViewModel() {
         viewModel.isUsageAccessPermissionRequired.observe(viewLifecycleOwner) { required ->
             if (required) {
-                showPermissionRequiredState()
-                binding.cardTodayUsage.setOnClickListener { showPermissionDialog() }
+                lockCards()
             } else {
-                hidePermissionMessage()
-                binding.cardTodayUsage.setOnClickListener {
-                    Log.d("HomeScreenFragment", "Today Usage Card Clicked")
-                }
+                unlockCards()
             }
         }
 
-        viewModel.todayUsage.observe(viewLifecycleOwner) { usage ->
+        viewModel.totalUsageSinceMidnight.observe(viewLifecycleOwner) { usage ->
             binding.tvTodayUsageValue.text = usage
         }
 
-        viewModel.loadTodayUsage()
-    }
+        viewModel.topUsedApps.observe(viewLifecycleOwner) { apps ->
+            val container = binding.layoutTopAppsList
+            container.removeAllViews()
 
-    private fun showPermissionRequiredState() {
-        binding.tvTodayUsageValue.text = "00:00"
-        binding.tvPermissionRequired.apply {
-            visibility = View.VISIBLE
-            text = "Permission required to track usage"
+            apps.forEach { (name, time, icon) ->
+                val row = layoutInflater.inflate(R.layout.item_top_app, container, false)
+
+                val iconView = row.findViewById<ImageView>(R.id.ivAppIcon)
+                val nameView = row.findViewById<TextView>(R.id.tvAppName)
+                val timeView = row.findViewById<TextView>(R.id.tvAppTime)
+
+                iconView.setImageDrawable(icon)
+                nameView.text = name
+                timeView.text = time
+
+                container.addView(row)
+            }
         }
-    }
 
-    private fun hidePermissionMessage() {
-        binding.tvPermissionRequired.visibility = View.GONE
+        viewModel.loadTotalUsageSinceMidnight()
+        viewModel.loadTopUsedApps()
     }
 
     private fun showPermissionDialog() {
@@ -116,6 +125,27 @@ class HomeScreenFragment : Fragment() {
             mode == android.app.AppOpsManager.MODE_ALLOWED
         } catch (e: Exception) {
             false
+        }
+    }
+
+    private fun lockCards() {
+        binding.cardTodayUsage.setOnClickListener { showPermissionDialog() }
+        binding.cardTopApps.setOnClickListener { showPermissionDialog() }
+
+        binding.overlayTodayUsage.visibility = View.VISIBLE
+        binding.overlayTopApps.visibility = View.VISIBLE
+    }
+
+    private fun unlockCards() {
+        binding.overlayTodayUsage.visibility = View.GONE
+        binding.overlayTopApps.visibility = View.GONE
+
+        binding.cardTodayUsage.setOnClickListener {
+            Log.d("HomeScreenFragment", "Today Usage Card Clicked")
+        }
+
+        binding.cardTopApps.setOnClickListener {
+            Log.d("HomeScreenFragment", "Top Apps Card Clicked")
         }
     }
 

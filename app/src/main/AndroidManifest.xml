@@ -7,6 +7,17 @@
         android:name="android.permission.PACKAGE_USAGE_STATS"
         tools:ignore="ProtectedPermissions" />
 
+    <queries>
+        <!-- List the packages you want to detect -->
+        <package android:name="com.google.android.youtube" />
+        <package android:name="com.whatsapp" />
+        <package android:name="com.instagram.android" />
+        <package android:name="com.android.chrome" />
+        <package android:name="com.snapchat.android" />
+        <package android:name="com.facebook.katana" />
+        <package android:name="com.linkedin.android" />
+    </queries>
+
 
     <application
         android:allowBackup="false"
