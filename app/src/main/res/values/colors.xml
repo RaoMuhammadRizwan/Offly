@@ -10,5 +10,8 @@
     <color name="chart_bar_start">#CCB71C1C</color>
     <color name="chart_bar_end">#CC880E4F</color>
 
+    <color name="red">#FF0000</color>
+    <color name="green">#00FF00</color>
+
 </resources>
 

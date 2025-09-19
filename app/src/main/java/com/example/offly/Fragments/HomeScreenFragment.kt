@@ -49,6 +49,8 @@ class HomeScreenFragment : Fragment() {
             viewModel.loadTotalUsageSinceMidnight()
             viewModel.loadTopUsedApps()
             viewModel.loadWeeklySocialUsage()
+            viewModel.loadUsageTrends()
+            viewModel.loadWeeklyTotalScreenTime()
         } else {
             prefsManager.setUsageAccessPermissionGranted(granted = false)
             lockCards()
@@ -79,7 +81,8 @@ class HomeScreenFragment : Fragment() {
         }
 
         viewModel.totalUsageSinceMidnight.observe(viewLifecycleOwner) { usage ->
-            binding.tvTodayUsageValue.text = usage
+            val time = usage.toLong()
+            binding.tvTodayUsageValue.text = formatUsageTime(time)
         }
 
         viewModel.weeklySocialUsage.observe(viewLifecycleOwner) { usage ->
@@ -185,9 +188,50 @@ class HomeScreenFragment : Fragment() {
             }
         }
 
+        viewModel.dailyTrend.observe(viewLifecycleOwner) { trend ->
+            if (trend != null) {
+                val today = formatUsageTime(trend.durationMs)
+                val yesterday = formatUsageTime(trend.compareDurationMs)
+                binding.tvTodayTime.text = today
+                binding.tvYesterdayTime.text = yesterday
+
+                binding.tvPercentChange.apply {
+                    text = if (trend.arrowUp) "↑${trend.percentChange.toInt()}%"
+                    else "↓${trend.percentChange.toInt()}%"
+                    setTextColor(
+                        ContextCompat.getColor(
+                            requireContext(),
+                            if (trend.arrowUp) R.color.red else R.color.green
+                        )
+                    )
+                }
+            }
+        }
+
+        viewModel.weeklyTrend.observe(viewLifecycleOwner) { trend ->
+            if (trend != null) {
+                val today = formatUsageTime(trend.durationMs)
+                val lastWeek = formatUsageTime(trend.compareDurationMs)
+                binding.tvTodayTime.text = today
+                binding.tvLastWeekTime.text = lastWeek
+            }
+        }
+
+        viewModel.weeklyTotalScreenTime.observe(viewLifecycleOwner) { totalScreenTimeList ->
+            val total = totalScreenTimeList.sum()
+            val average = if (totalScreenTimeList.isNotEmpty()) total / totalScreenTimeList.size else 0L
+            binding.tvWeeklyTotal.text = formatUsageTime(total)
+            binding.tvWeeklyAverage.text = formatUsageTime(average)
+
+        }
+
+
+
         viewModel.loadTotalUsageSinceMidnight()
         viewModel.loadTopUsedApps()
         viewModel.loadWeeklySocialUsage()
+        viewModel.loadUsageTrends()
+        viewModel.loadWeeklyTotalScreenTime()
     }
 
     private fun showPermissionDialog() {
@@ -246,6 +290,18 @@ class HomeScreenFragment : Fragment() {
             Log.d("HomeScreenFragment", "Top Apps Card Clicked")
         }
     }
+
+    private fun formatUsageTime(ms: Long): String {
+        val minutes = ms / 60_000
+        val hours = minutes / 60
+        val remaining = minutes % 60
+        return when {
+            hours > 0 -> "${hours}h ${remaining}m"
+            minutes > 0 -> "${minutes}m"
+            else -> "<1m"
+        }
+    }
+
 
     override fun onDestroyView() {
         super.onDestroyView()

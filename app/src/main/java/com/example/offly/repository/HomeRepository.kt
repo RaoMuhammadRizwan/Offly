@@ -153,4 +153,66 @@ class HomeRepository(private val context: Context) {
 
         return hoursPerDay.reversed() // oldest → newest
     }
+
+    fun getTotalUsageForDay(daysAgo: Int): Long {
+        val cal = Calendar.getInstance()
+        // End of target day
+        cal.set(Calendar.HOUR_OF_DAY, 23)
+        cal.set(Calendar.MINUTE, 59)
+        cal.set(Calendar.SECOND, 59)
+        cal.set(Calendar.MILLISECOND, 999)
+        cal.add(Calendar.DAY_OF_YEAR, -daysAgo)
+        val end = cal.timeInMillis
+
+        // Start of target day
+        cal.set(Calendar.HOUR_OF_DAY, 0)
+        cal.set(Calendar.MINUTE, 0)
+        cal.set(Calendar.SECOND, 0)
+        cal.set(Calendar.MILLISECOND, 0)
+        val start = cal.timeInMillis
+
+        return usageSince(start, end)
+            .filterKeys { it != context.packageName }
+            .values.sum()
+    }
+
+    fun getWeeklyTotalScreenTime(): List<Long> {
+        val pm = context.packageManager
+        val cal = Calendar.getInstance()
+
+        // Move to the *end* of today
+        cal.set(Calendar.HOUR_OF_DAY, 23)
+        cal.set(Calendar.MINUTE, 59)
+        cal.set(Calendar.SECOND, 59)
+        cal.set(Calendar.MILLISECOND, 999)
+
+        var end = cal.timeInMillis
+        val dailyTotals = mutableListOf<Long>()
+
+        repeat(7) {
+            // Start of current day
+            cal.set(Calendar.HOUR_OF_DAY, 0)
+            cal.set(Calendar.MINUTE, 0)
+            cal.set(Calendar.SECOND, 0)
+            cal.set(Calendar.MILLISECOND, 0)
+            val start = cal.timeInMillis
+
+            // total usage for this day (exclude your own app, include all launchable apps)
+            val totalMs = usageSince(start, end).entries.sumOf { (pkg, ms) ->
+                if (pkg == context.packageName) 0L
+                else {
+                    val ai = try { pm.getApplicationInfo(pkg, 0) } catch (_: Exception) { null }
+                    if (ai != null && pm.getLaunchIntentForPackage(pkg) != null) ms else 0L
+                }
+            }
+
+            dailyTotals.add(totalMs)
+
+            // shift to previous day
+            end = start
+            cal.add(Calendar.DAY_OF_YEAR, -1)
+        }
+
+        return dailyTotals.reversed()  // oldest → newest
+    }
 }
