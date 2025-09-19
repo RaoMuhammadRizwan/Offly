@@ -81,8 +81,7 @@ class HomeScreenFragment : Fragment() {
         }
 
         viewModel.totalUsageSinceMidnight.observe(viewLifecycleOwner) { usage ->
-            val time = usage.toLong()
-            binding.tvTodayUsageValue.text = formatUsageTime(time)
+            binding.tvTodayUsageValue.text = usage
         }
 
         viewModel.weeklySocialUsage.observe(viewLifecycleOwner) { usage ->

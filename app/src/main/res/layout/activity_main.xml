@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
+    android:background="@drawable/bg_dark_gradient"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
@@ -25,7 +26,6 @@
         android:layout_height="wrap_content"
         android:background="@drawable/bg_bottom_nav"
         android:visibility="gone"
-        android:elevation="8dp"
         app:itemIconTint="@color/nav_item_colors"
         app:menu="@menu/bottom_nav_menu"
         app:labelVisibilityMode="unlabeled"
