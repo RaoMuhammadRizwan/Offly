@@ -1,4 +1,4 @@
-package com.example.offly.Fragments
+package com.example.offly.Fragments.home
 
 import android.content.Context
 import android.content.Intent
@@ -16,6 +16,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.example.offly.R
 import com.example.offly.databinding.FragmentHomeScreenBinding
 import com.example.offly.utils.CustomDialog
@@ -26,9 +27,6 @@ import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.BarData
 import com.github.mikephil.charting.data.BarDataSet
 import com.github.mikephil.charting.data.BarEntry
-import com.github.mikephil.charting.data.Entry
-import com.github.mikephil.charting.data.LineData
-import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
 import com.github.mikephil.charting.formatter.ValueFormatter
 
@@ -283,6 +281,11 @@ class HomeScreenFragment : Fragment() {
 
         binding.cardTodayUsage.setOnClickListener {
             Log.d("HomeScreenFragment", "Today Usage Card Clicked")
+            try {
+            findNavController().navigate(R.id.action_homeScreenFragment_to_homeAppDetailFragment)
+            } catch (e: Exception) {
+                Log.e("HomeScreenFragment", "Navigation failed: ${e.message}")
+            }
         }
 
         binding.cardTopApps.setOnClickListener {

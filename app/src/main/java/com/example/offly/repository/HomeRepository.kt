@@ -215,4 +215,68 @@ class HomeRepository(private val context: Context) {
 
         return dailyTotals.reversed()  // oldest → newest
     }
+
+    /** 🔹 NEW: full social-app usage list (all in socialApps) for today */
+    fun getAllSocialAppsUsageToday(): List<AppUsage> {
+        val pm = context.packageManager
+        val usage = usageSince(startOfToday(), System.currentTimeMillis())
+
+        return usage.filterKeys { it in socialApps }
+            .mapNotNull { (pkg, ms) ->
+                try {
+                    val ai = pm.getApplicationInfo(pkg, 0)
+                    AppUsage(
+                        packageName = pkg,
+                        appName = ai.loadLabel(pm).toString(),
+                        appIcon = ai.loadIcon(pm),
+                        usageTimeMs = ms
+                    )
+                } catch (_: PackageManager.NameNotFoundException) {
+                    null
+                }
+            }
+            .sortedByDescending { it.usageTimeMs }
+    }
+
+    /** 🔹 Social-app usage for any specific day (0 = today, 1 = yesterday, etc.) */
+    fun getAllSocialAppsUsageForDay(daysAgo: Int): List<AppUsage> {
+        val pm = context.packageManager
+
+        // End of target day
+        val cal = Calendar.getInstance()
+        cal.set(Calendar.HOUR_OF_DAY, 23)
+        cal.set(Calendar.MINUTE, 59)
+        cal.set(Calendar.SECOND, 59)
+        cal.set(Calendar.MILLISECOND, 999)
+        cal.add(Calendar.DAY_OF_YEAR, -daysAgo)
+        val end = cal.timeInMillis
+
+        // Start of target day
+        cal.set(Calendar.HOUR_OF_DAY, 0)
+        cal.set(Calendar.MINUTE, 0)
+        cal.set(Calendar.SECOND, 0)
+        cal.set(Calendar.MILLISECOND, 0)
+        val start = cal.timeInMillis
+
+        val usage = usageSince(start, end)
+
+        return usage.filterKeys { it in socialApps }
+            .mapNotNull { (pkg, ms) ->
+                try {
+                    val ai = pm.getApplicationInfo(pkg, 0)
+                    AppUsage(
+                        packageName = pkg,
+                        appName = ai.loadLabel(pm).toString(),
+                        appIcon = ai.loadIcon(pm),
+                        usageTimeMs = ms
+                    )
+                } catch (_: PackageManager.NameNotFoundException) {
+                    null
+                }
+            }
+            .sortedByDescending { it.usageTimeMs }
+    }
+
+
+
 }

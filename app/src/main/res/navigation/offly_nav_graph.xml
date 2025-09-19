@@ -34,9 +34,13 @@
     <!-- Home Screen -->
     <fragment
         android:id="@+id/homeScreenFragment"
-        android:name="com.example.offly.Fragments.HomeScreenFragment"
+        android:name="com.example.offly.Fragments.home.HomeScreenFragment"
         android:label="fragment_home_screen"
-        tools:layout="@layout/fragment_home_screen" />
+        tools:layout="@layout/fragment_home_screen" >
+        <action
+            android:id="@+id/action_homeScreenFragment_to_homeAppDetailFragment"
+            app:destination="@id/homeAppDetailFragment" />
+    </fragment>
 
     <!-- Onboarding Flow -->
     <fragment
@@ -98,5 +102,10 @@
         android:name="com.example.offly.Fragments.settingsFragment"
         android:label="fragment_settings"
         tools:layout="@layout/fragment_settings" />
+    <fragment
+        android:id="@+id/homeAppDetailFragment"
+        android:name="com.example.offly.Fragments.home.HomeAppDetailFragment"
+        android:label="HomeAppDetailFragment"
+        tools:layout="@layout/fragment_home_app_detail" />
 
 </navigation>

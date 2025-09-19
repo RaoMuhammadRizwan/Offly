@@ -6,6 +6,7 @@ import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.example.offly.dataclass.AppUsage
 import com.example.offly.dataclass.UsageTrend
 import com.example.offly.repository.HomeRepository
 import kotlinx.coroutines.Dispatchers
@@ -19,6 +20,8 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
     val isUsageAccessPermissionRequired = MutableLiveData<Boolean>()
     val weeklySocialUsage = MutableLiveData<List<Float>>()
     val weeklyTotalScreenTime = MutableLiveData<List<Long>>()
+    val allSocialAppsUsageToday = MutableLiveData<List<AppUsage>>()
+    val allSocialAppsUsageForDay = MutableLiveData<List<AppUsage>>()
 
     val dailyTrend = MutableLiveData<UsageTrend?>()
     val weeklyTrend = MutableLiveData<UsageTrend?>()
@@ -119,6 +122,32 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
             } catch (e: Exception) {
                 Log.e("HomeViewModel", "Error loading weekly total screen time", e)
                 weeklyTotalScreenTime.postValue(emptyList())
+            }
+        }
+    }
+
+    fun loadAllSocialAppsUsageToday() {
+        if (!repo.isUsageAccessPermissionGranted()) return
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                val usage = repo.getAllSocialAppsUsageToday()
+                allSocialAppsUsageToday.postValue(usage)
+            } catch (e: Exception) {
+                Log.e("HomeViewModel", "Error loading all social apps usage today", e)
+                allSocialAppsUsageToday.postValue(emptyList())
+            }
+        }
+    }
+
+    fun loadAllSocialAppsUsageForDay(daysAgo: Int){
+        if (!repo.isUsageAccessPermissionGranted()) return
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                val usage = repo.getAllSocialAppsUsageForDay(daysAgo)
+                allSocialAppsUsageForDay.postValue(usage)
+            } catch (e : Exception){
+            Log.e("HomeViewModel", "Error loading all social apps usage for day", e)
+            allSocialAppsUsageForDay.postValue(emptyList())
             }
         }
     }

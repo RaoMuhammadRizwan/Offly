@@ -24,8 +24,11 @@
     <string name="permission2_title">Accessibility Service Permission</string>
     <string name="permission2_subtitle">We need this to monitor and manage your screen interactions safely.</string>
     <string name="permission2_btn_text">Grant Permission</string>
-    <string name="permission2_description">Without this, Offly cannot prevent apps from distracting you.</string>"
+    <string name="permission2_description">Without this, Offly cannot prevent apps from distracting you.</string>
+    "
 
 
     <string name="accessibility_service_description">Offly needs Accessibility Service to monitor and manage your screen interactions safely.</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
