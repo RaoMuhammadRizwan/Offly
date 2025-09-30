@@ -34,6 +34,8 @@ import com.github.mikephil.charting.formatter.ValueFormatter
 import com.github.mikephil.charting.utils.ColorTemplate
 import java.text.DateFormat
 import java.util.Calendar
+import androidx.core.graphics.toColorInt
+import androidx.recyclerview.widget.RecyclerView 
 
 class HomeAppDetailFragment : Fragment() {
     private var _binding: FragmentHomeAppDetailBinding? = null
@@ -121,7 +123,7 @@ class HomeAppDetailFragment : Fragment() {
             setDrawValues(true)
             valueTextSize = 12f
             valueTextColor = Color.WHITE
-            color = Color.parseColor("#1877F2") // default line color
+            color = "#1877F2".toColorInt() // default line color
             setCircleColors(colors)
             valueFormatter = object : ValueFormatter() {
                 override fun getPointLabel(entry: Entry?): String {
@@ -132,7 +134,7 @@ class HomeAppDetailFragment : Fragment() {
                 }
             }
             setDrawFilled(true)
-            fillColor = Color.parseColor("#4285F4")
+            fillColor = "#4285F4".toColorInt()
             fillAlpha = 50
         }
 
@@ -194,23 +196,19 @@ class HomeAppDetailFragment : Fragment() {
         "snapchat" -> "SC"
         "tiktok"   -> "TT"
         "twitter"  -> "TW"
-        "chrome"   -> "CR"
         else -> appName.take(3).uppercase()
     }
 
     private fun getAppBrandColor(appName: String): Int = when (appName.lowercase()) {
-        "youtube"  -> Color.parseColor("#FF0000")
-        "instagram"-> Color.parseColor("#E4405F")
-        "facebook" -> Color.parseColor("#1877F2")
-        "whatsapp" -> Color.parseColor("#25D366")
-        "snapchat" -> Color.parseColor("#FFFC00")
-        "tiktok"   -> Color.parseColor("#000000")
-        "twitter"  -> Color.parseColor("#1DA1F2")
-        "chrome"   -> Color.parseColor("#4285F4")
-        else       -> Color.parseColor("#9E9E9E")
+        "youtube"  -> "#FF0000".toColorInt()
+        "instagram"-> "#E4405F".toColorInt()
+        "facebook" -> "#1877F2".toColorInt()
+        "whatsapp" -> "#25D366".toColorInt()
+        "snapchat" -> "#FFFC00".toColorInt()
+        "tiktok"   -> "#000000".toColorInt()
+        "twitter"  -> "#1DA1F2".toColorInt()
+        else       -> "#9E9E9E".toColorInt()
     }
-
-
 
     override fun onDestroyView() {
         super.onDestroyView()

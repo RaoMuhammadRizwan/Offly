@@ -53,4 +53,5 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.core)
 
     implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
+    implementation("com.github.Qusion:android-roundprogressbar:0.3.0")
 }

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Custom Switch Theme -->
+    <style name="CustomSwitchTheme" parent="Theme.AppCompat.Light">
+        <item name="colorControlActivated">@color/switch_track_checked</item>
+        <item name="colorSwitchThumbNormal">@color/white</item>
+        <item name="android:colorForeground">@color/switch_track_unchecked</item>
+    </style>
+</resources>
